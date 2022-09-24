@@ -78,9 +78,9 @@ class Colony:
     def archive(self):
         fn = datetime.now().strftime("%Y-%m-%d")
         if not os.path.exists(f"..\\archive\\{fn}"):
-            os.mkdir(f"..\\archive\\{fn}")
+            os.mkdir(f"archive\\{fn}")
         for a in self._articles:
-            with open(f"..\\archive\\{fn}\\{a}.txt") as f:
+            with open(f"archive\\{fn}\\{a}.txt", "w+") as f:
                 for article in self._articles[a]:
                     f.write(article + "\n")
 
