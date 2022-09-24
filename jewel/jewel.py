@@ -76,13 +76,15 @@ class Colony:
         return iter(self._articles.keys())
 
     def archive(self):
-        fn = datetime.now().strftime("%Y-%m-%d")
-        if not os.path.exists(f"..\\archive\\{fn}"):
-            os.mkdir(f"archive\\{fn}")
+        fn = datetime.now().strftime("%Y-%m-%d").split("-")
+        y, m, d = fn[0], fn[1], fn[2]
         for a in self._articles:
-            with open(f"archive\\{fn}\\{a}.txt", "w+") as f:
-                for article in self._articles[a]:
-                    f.write(article + "\n")
+            if not os.path.exists(f".\\archive\\{y}\\{m}\\{d}\\{a}"):
+                os.makedirs(f"archive\\{y}\\{m}\\{d}\\{a}")
+            for article in self._articles[a]:
+                with open(f"archive\\{y}\\{m}\\{d}\\{a}\\{article}.txt", "w+", encoding="utf-8") as f:
+                    for headline in self._articles[a][article]:
+                        f.write(headline + "\n")
 
     def condense(self):
         for c in self:
@@ -99,7 +101,7 @@ class Colony:
 
     def process_articles(self, ruby):
 
-        headlines = [n.find("h2").a.string.strip() for n in ruby.find_all(class_="article-tri-headline")]
+        headlines = [n.find("h2") for n in ruby.find_all(class_="article-tri-headline")]
         headlines = [n.a.string.strip() for n in headlines if n.a and n.a.string]
 
         larges = [n.find("h2") for n in ruby.find_all(class_="article-large")]
