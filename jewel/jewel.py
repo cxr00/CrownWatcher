@@ -37,13 +37,15 @@ class Jewel:
         """
         self.sess = requests.Session()
         self["Home"] = {"main": bs4.BeautifulSoup(self.sess.get(site).text, "html.parser")}
-
+        self.sess.close()
         for li in self["Home"]["main"].find(class_="nav-primary").find_all("li")[1:-1]:
             if (not categories or li.span.a.string in categories) and li.span.a.string != "Video":
                 print(f"pulling from {li.span.a.string}...")
+                self.sess = requests.Session()
                 self[li.span.a.string] = {"main": bs4.BeautifulSoup(self.sess.get(site + li.span.a["href"]).text, "html.parser")}
                 self.refresh_category(li.span.a.string)
-        self.sess.close()
+                self.sess.close()
+        # self.sess.close()
         self.sess = None
 
     def refresh_category(self, category):
