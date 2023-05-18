@@ -16,7 +16,6 @@ class Jewel:
 
     def __init__(self):
         self.sess = None
-        # {"category": {"main": bs4_obj, "subcategory1": bs4_obj1, "subcategory2": bs4_obj2}}
         self._pages: dict[str, Optional[bs4.BeautifulSoup]] = {}
 
     def __getitem__(self, item):

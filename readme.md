@@ -2,7 +2,7 @@
 
 CrownWatcher is a simple scraping tool which grabs article headlines across every category and subcategory of the Daily Mail.
 
-Just clone, set your directory to `CrownWatcher`, and run:
+Just clone, set your directory to `CrownWatcher`, and run `run.bat`:
 
 ```
 python -m jewel
@@ -23,4 +23,4 @@ archive
         ...
 ```
 
-Note that there is sometimes category overlap. For example, Meghan Markle shows up under U.K. and U.S. Showbiz categories.
+Note that there is sometimes category overlap. For example, Meghan Markle shows up under "U.K." and "Showbiz" categories.
